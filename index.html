@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Política de Privacidade — MIND</title>
+  <meta name="description" content="Política de Privacidade da extensão MIND.">
+  <style>
+    :root{color-scheme:light dark;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    body{margin:0;background:#0f141b;color:#e8eef7}
+    main{max-width:860px;margin:0 auto;padding:48px 22px 80px}
+    h1,h2{line-height:1.2}
+    h1{font-size:2rem;margin-bottom:.35rem}
+    h2{font-size:1.15rem;margin-top:2rem}
+    p,li{line-height:1.7;color:#cbd5e1}
+    a{color:#7db4ff}
+    .meta{color:#8fa0b5;margin-bottom:2rem}
+    code{background:#18212c;padding:.12rem .35rem;border-radius:.3rem}
+    hr{border:0;border-top:1px solid #263242;margin:2rem 0}
+  </style>
+</head>
+<body>
+<main>
+  <h1>Política de Privacidade — MIND</h1>
+  <p class="meta"><strong>Última atualização:</strong> 20 de setembro de 2026</p>
+
+  <p>Esta Política de Privacidade descreve como a extensão <strong>MIND</strong> trata dados quando você usa seus recursos de notas, organização local, captura de páginas e sincronização online opcional.</p>
+
+  <h2>1. Princípio local-first</h2>
+  <p>O MIND foi projetado para funcionar principalmente de forma <strong>local-first</strong>. Notas internas, metadados e índices locais podem ser armazenados no navegador usando IndexedDB. Preferências e dados temporários podem ser armazenados pelos mecanismos locais do Chrome. O conteúdo local não é enviado para um servidor apenas por existir no MIND.</p>
+
+  <h2>2. Dados tratados localmente</h2>
+  <ul>
+    <li>conteúdo, títulos e caminhos de notas;</li>
+    <li>pastas e raízes;</li>
+    <li>links internos, backlinks, tags, headings e metadados derivados;</li>
+    <li>preferências de interface e organização;</li>
+    <li>dados necessários para busca, grafo e mapas mentais.</li>
+  </ul>
+
+  <h2>3. Captura de páginas e seleções</h2>
+  <p>Quando você solicita explicitamente uma captura, o MIND pode acessar a guia ativa para obter título, URL, descrição, texto selecionado e conteúdo textual da página necessário à captura. Esse acesso ocorre para executar ações iniciadas pelo usuário, como salvar uma página ou seleção. O MIND não utiliza essa permissão para monitorar continuamente a navegação.</p>
+
+  <h2>4. Permissões do Chrome</h2>
+  <p>O MIND pode utilizar <code>storage</code>, <code>sidePanel</code>, <code>contextMenus</code>, <code>scripting</code>, <code>activeTab</code>, <code>identity</code> e permissões opcionais de host para fornecer suas funcionalidades. Essas permissões não são usadas para publicidade comportamental.</p>
+
+  <h2>5. Conta Google e autenticação</h2>
+  <p>Se você optar pela autenticação online com Google, o MIND utiliza o fluxo de autenticação do Chrome/Google. O token de identidade obtido é enviado ao Supabase Auth para criar ou restaurar a sessão. O pacote da extensão não contém Google Client Secret nem chave <code>service_role</code> do Supabase.</p>
+
+  <h2>6. Sincronização online opcional</h2>
+  <p>Quando você usa uma raiz online, dados dessa raiz podem ser enviados ao Supabase, incluindo identificador da conta, nome da raiz, caminhos de pastas, caminhos e títulos de notas, conteúdo das notas online, posição e datas de criação/atualização. O banco utiliza Row Level Security (RLS) para restringir registros ao usuário autenticado correspondente.</p>
+  <p>Notas e raízes mantidas apenas localmente não são convertidas automaticamente em conteúdo online.</p>
+
+  <h2>7. Serviços de terceiros</h2>
+  <p>O MIND pode utilizar Google para autenticação opcional, Supabase para autenticação e sincronização online opcional e Google Chrome/Chrome Web Store para execução e distribuição. Esses serviços possuem políticas próprias.</p>
+
+  <h2>8. Analytics, publicidade e venda de dados</h2>
+  <p>A versão descrita nesta política não inclui sistema próprio de publicidade comportamental nem integração de analytics destinada a rastrear o uso do usuário. O MIND não vende dados pessoais.</p>
+
+  <h2>9. Retenção e exclusão</h2>
+  <p>Dados locais permanecem no dispositivo até serem removidos pelo usuário, pela extensão, pelo navegador ou pela limpeza dos dados da extensão. Conteúdo online permanece no serviço de nuvem enquanto estiver associado à conta e não for excluído.</p>
+
+  <h2>10. Segurança</h2>
+  <p>O MIND utiliza armazenamento local, HTTPS para o backend configurado, autenticação para recursos online, RLS no banco online e evita incluir segredos administrativos no pacote. Nenhum sistema pode garantir segurança absoluta.</p>
+
+  <h2>11. Crianças</h2>
+  <p>O MIND não é projetado especificamente para coletar dados de crianças nem utiliza recursos direcionados a publicidade infantil.</p>
+
+  <h2>12. Alterações nesta política</h2>
+  <p>Esta política pode ser atualizada quando houver alterações relevantes nas funcionalidades, integrações, permissões ou práticas de tratamento de dados.</p>
+
+  <h2>13. Contato</h2>
+  <p>Para dúvidas sobre privacidade, utilize o repositório público <a href="https://github.com/marcosmurilorodriguesb-alt/MIND-privacy">MIND-privacy</a> e abra uma Issue.</p>
+</main>
+</body>
+</html>
