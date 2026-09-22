@@ -1,6 +1,6 @@
 # Política de Privacidade — MIND
 
-**Última atualização:** 20 de setembro de 2026
+**Última atualização:** 22 de setembro de 2026
 
 Esta Política de Privacidade descreve como a extensão **MIND** trata dados quando você usa seus recursos de notas, organização local, captura de páginas e sincronização online opcional.
 
@@ -33,7 +33,7 @@ Quando você solicita explicitamente uma captura, o MIND pode acessar a guia ati
 - URL;
 - descrição da página, quando disponível;
 - texto selecionado;
-- conteúdo textual da página, limitado pelo próprio mecanismo de captura.
+- conteúdo textual da página necessário à captura.
 
 Esse acesso ocorre para executar a ação solicitada pelo usuário, como **Salvar página no MIND** ou **Salvar seleção no MIND**.
 
@@ -41,7 +41,7 @@ O MIND não usa essa permissão para monitorar continuamente a navegação.
 
 ## 4. Permissões do Chrome
 
-A extensão pode solicitar permissões como:
+A extensão pode utilizar permissões como:
 
 - **storage** — armazenar preferências e dados locais necessários ao funcionamento;
 - **sidePanel** — exibir o painel lateral;
@@ -53,21 +53,30 @@ A extensão pode solicitar permissões como:
 
 As permissões são utilizadas para funcionalidades do MIND e não para publicidade comportamental.
 
-## 5. Conta Google e autenticação
+## 5. Autenticação da conta MIND e dados de senha
 
-Se você optar por usar autenticação online com Google, o MIND utiliza o fluxo de autenticação do Chrome e do Google para obter um token de identidade.
+O MIND oferece autenticação online por meio do **Supabase Auth**.
 
-Esse token é enviado ao **Supabase Auth** para criar ou restaurar a sessão da sua conta online do MIND.
+Quando o usuário cria uma conta ou entra na conta MIND usando autenticação por e-mail e senha, o formulário de autenticação processa:
 
-O pacote da extensão não contém Google Client Secret nem chave `service_role` do Supabase.
+- endereço de e-mail ou identificador da conta;
+- **senha da conta MIND**.
 
-## 6. Sincronização online opcional
+A senha é utilizada exclusivamente para realizar a autenticação junto ao **Supabase Auth**. Durante o processo de login, o MIND pode manter a senha temporariamente em memória para enviá-la ao serviço de autenticação.
 
-Os recursos online são opcionais.
+**O MIND não usa a senha para outra finalidade e não deve armazená-la em IndexedDB, chrome.storage, arquivos locais, notas, logs ou bancos de dados próprios. O MIND não vende, compartilha ou envia a senha para terceiros além do serviço de autenticação necessário para realizar o login.**
 
-Quando você cria ou utiliza uma raiz online, dados relacionados a essa raiz podem ser enviados ao projeto Supabase utilizado pelo MIND. Isso pode incluir:
+A autenticação e o processamento das credenciais são realizados pelo Supabase Auth. O MIND não possui nem inclui no pacote da extensão uma chave `service_role` do Supabase.
+
+Quando o usuário utiliza autenticação por Google, a autenticação é realizada pelo fluxo correspondente do Google/Chrome e o MIND não recebe a senha da conta Google.
+
+## 6. Conta, sessão e sincronização online
+
+Quando recursos online são utilizados, o MIND pode processar dados relacionados à conta e à sessão, incluindo:
 
 - identificador da conta;
+- endereço de e-mail associado à conta, quando fornecido pelo provedor de autenticação;
+- tokens ou informações de sessão necessários para manter a autenticação;
 - nome da raiz;
 - caminhos de pastas;
 - caminhos e títulos de notas;
@@ -75,35 +84,41 @@ Quando você cria ou utiliza uma raiz online, dados relacionados a essa raiz pod
 - posição/ordenação;
 - datas de criação e atualização.
 
-O banco utiliza políticas de **Row Level Security (RLS)** para restringir o acesso dos registros ao usuário autenticado correspondente.
+Esses dados são usados para autenticação, criação/restauração de sessão e sincronização das funcionalidades online solicitadas pelo usuário.
+
+## 7. Sincronização online opcional
+
+Quando você cria ou utiliza uma raiz online, dados relacionados a essa raiz podem ser enviados ao projeto Supabase utilizado pelo MIND. Isso pode incluir os dados de conta e os dados de conteúdo descritos nesta política.
+
+O banco utiliza políticas de **Row Level Security (RLS)** para restringir o acesso aos registros ao usuário autenticado correspondente.
 
 Notas e raízes mantidas apenas localmente não são convertidas automaticamente em conteúdo online.
 
-## 7. Serviços de terceiros
+## 8. Serviços de terceiros
 
 O MIND pode utilizar:
 
 - **Google**, para autenticação opcional;
-- **Supabase**, para autenticação e armazenamento/sincronização online opcional;
+- **Supabase**, para autenticação, processamento de credenciais e armazenamento/sincronização online opcional;
 - **Google Chrome / Chrome Web Store**, para distribuição e execução da extensão.
 
-O uso desses serviços também pode estar sujeito às políticas de privacidade próprias desses fornecedores.
+Esses serviços também podem estar sujeitos às suas próprias políticas de privacidade e práticas de tratamento de dados.
 
-## 8. Analytics, publicidade e venda de dados
+## 9. Analytics, publicidade e venda de dados
 
 A versão descrita nesta política não inclui sistema próprio de publicidade comportamental nem integração de analytics destinada a rastrear o uso do usuário.
 
 O MIND não vende dados pessoais.
 
-## 9. Retenção e exclusão
+## 10. Retenção e exclusão
 
 Dados locais permanecem no dispositivo até serem removidos pelo usuário, pela extensão, pelo navegador ou pela limpeza dos dados da extensão.
 
 Conteúdo online permanece no serviço de nuvem enquanto estiver associado à conta e não for excluído pelo usuário ou por processos administrativos aplicáveis.
 
-A exclusão de raízes, pastas ou notas online utiliza as operações de exclusão correspondentes no serviço de nuvem.
+**As senhas de autenticação não são armazenadas pelo MIND em seus mecanismos próprios de armazenamento.** O armazenamento e o gerenciamento de credenciais de autenticação seguem o serviço de autenticação utilizado.
 
-## 10. Segurança
+## 11. Segurança
 
 O MIND procura aplicar medidas compatíveis com sua arquitetura, incluindo:
 
@@ -111,21 +126,22 @@ O MIND procura aplicar medidas compatíveis com sua arquitetura, incluindo:
 - uso de HTTPS para comunicação com o backend configurado;
 - autenticação para recursos online;
 - políticas RLS no banco online;
-- ausência de segredos administrativos no pacote da extensão.
+- ausência de segredos administrativos no pacote da extensão;
+- não armazenamento da senha da conta MIND nos mecanismos locais próprios da extensão.
 
 Nenhum sistema pode garantir segurança absoluta.
 
-## 11. Crianças
+## 12. Crianças
 
 O MIND não é projetado especificamente para coletar dados de crianças nem utiliza recursos direcionados a publicidade infantil.
 
-## 12. Alterações nesta política
+## 13. Alterações nesta política
 
 Esta política pode ser atualizada quando houver alterações relevantes nas funcionalidades, integrações, permissões ou práticas de tratamento de dados do MIND.
 
 A data de atualização será alterada quando houver uma nova versão desta política.
 
-## 13. Contato
+## 14. Contato
 
 Para dúvidas sobre privacidade ou sobre esta política, utilize o repositório público:
 
